@@ -7,7 +7,7 @@ export default function App() {
         <TextInput placeholder="Your course Goals" style={styles.textStyle} />
         <Button title="Tap Me" />
       </View>
-      <View>
+      <View style={styles.goals}>
         <Text>List of Goals..</Text>
       </View>
     </View>
@@ -16,16 +16,27 @@ export default function App() {
 
 const styles = StyleSheet.create({
   appContainer: {
-    padding: 50,
+    paddingTop: 50,
+    paddingHorizontal:16,
+    flex:1
   },
   inputContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems:"center",
+    flex:1,
+    marginBottom:24,
+    borderBottomWidth:1,
+    borderBottomColor:'#cccccc'
   },
   textStyle: {
     width: "80%",
-    borderColor: "#cccccc",
+    borderColor: "#ccccc",
     borderWidth:1,
     padding: 10
   },
+  goals:{
+    flex:3
+  }
 });
+
