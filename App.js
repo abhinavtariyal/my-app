@@ -1,10 +1,18 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import { useState } from "react";
 export default function App() {
   const [text, setText] = useState("");
   const [goalsArray, setGoalsArray] = useState([]);
   function onChangeText(enteredText) {
-    setText(enteredText);
+    setText({ text: enteredText, key: Math.random().toString() });
   }
 
   function onPressHandler() {
@@ -22,11 +30,16 @@ export default function App() {
         <Button title="Tap Me" onPress={onPressHandler} />
       </View>
       <View style={styles.goals}>
-        {goalsArray.map((goal) => (
-          <View key={goal} style= {styles.goalItem}>
-            <Text style={styles.inTextStyle}>{goal} </Text>
-          </View>
-        ))}
+        <FlatList
+          data={goalsArray}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.inTextStyle}>{itemData.item.text} </Text>
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );
@@ -55,14 +68,13 @@ const styles = StyleSheet.create({
   goals: {
     flex: 3,
   },
-  goalItem:{
-    backgroundColor:'#5e0acc',
-    borderRadius:8,
-    margin:5,
-    padding:5
+  goalItem: {
+    backgroundColor: "#5e0acc",
+    borderRadius: 8,
+    margin: 5,
+    padding: 5,
   },
-  inTextStyle:{
-    color:'white',
-  }
-
+  inTextStyle: {
+    color: "white",
+  },
 });
